@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.effortConsoleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.effortConsoleController">
    <children>
       <Button layoutX="600.0" layoutY="6.0" mnemonicParsing="false" onAction="#switchToLogin" text="LogOut" />
       <Button layoutX="50.0" layoutY="423.0" mnemonicParsing="false" text="EffortConsole" />
@@ -26,7 +26,6 @@
       <Line endX="662.0" endY="34.999996185302734" startY="35.0" />
       <Button layoutX="524.0" layoutY="423.0" mnemonicParsing="false" onAction="#switchToPPCard" text="Planning Poker" />
       <Rectangle fx:id="rectangleColor" arcHeight="5.0" arcWidth="5.0" fill="#ff7063" height="39.0" layoutX="-166.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="841.0" />
-      <Text layoutX="36.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When you're ready, please press &quot;Start an Activity&quot;" />
       <Button layoutX="79.0" layoutY="307.0" mnemonicParsing="false" onAction="#startActivity" prefHeight="25.0" prefWidth="179.0" text="Start an Activity" />
       <ComboBox fx:id="comboBoxProject" layoutX="104.0" layoutY="152.0" prefHeight="25.0" prefWidth="179.0" />
       <ComboBox fx:id="comboBoxLifeCycle" layoutX="374.0" layoutY="152.0" prefHeight="25.0" prefWidth="179.0" />
@@ -41,7 +40,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="366.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When you've finished, press &quot;Finish Activity&quot;" />
       <Button layoutX="392.0" layoutY="307.0" mnemonicParsing="false" onAction="#finishActivity" prefHeight="25.0" prefWidth="179.0" text="Finish Activity" />
       <Label fx:id="clockText" layoutX="245.0" layoutY="44.0" text="Clock is Stopped">
          <font>
@@ -55,10 +53,21 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="warningActivityStart" layoutX="113.0" layoutY="342.0" textFill="#ff7063">
+      <Label fx:id="warningActivityStart" layoutX="180.0" layoutY="342.0" textFill="#ff7063">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Text layoutX="36.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When you're ready, please press &quot;Start an Activity&quot;">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="348.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When you've finished working, press &quot;Finish Activity&quot;">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Label fx:id="elapsedTime" layoutX="216.0" layoutY="377.0" />
    </children>
 </AnchorPane>
