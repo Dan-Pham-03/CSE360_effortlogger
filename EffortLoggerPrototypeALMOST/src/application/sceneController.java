@@ -37,6 +37,18 @@ public class sceneController {
 		stage.setScene(scene); // Set the scene to the primary stage
 		stage.show(); // Display the stage
 	}
+
+	// Changes the window to the TwoFactorAuthen scene
+	public void switchToTwoFactorAuthen(ActionEvent event, int authCode) throws IOException {
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("TwoFactorAuthen.fxml"));
+	    root = loader.load();
+	    TwoFactorAuthenController controller = loader.getController();
+	    controller.setAuthCode(authCode);
+	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+	}
 	
 	// Changes the window to PP card
 	public void switchToPPCard(ActionEvent eventPP) throws IOException{
