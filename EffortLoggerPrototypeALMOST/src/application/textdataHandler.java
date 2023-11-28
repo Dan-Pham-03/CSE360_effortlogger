@@ -18,7 +18,9 @@ public class textdataHandler {
 			char[] chars = df.toCharArray();
 			String newdf;
 			for (int i = 1; i < chars.length; i++) {
-				chars[i] = '*'; //replaces with *
+				if(!chars[i].equals(" "){
+					chars[i] = '*'; //replaces with *
+				}
 			}
 			newdf = String.valueOf(chars);
 			return newdf;
