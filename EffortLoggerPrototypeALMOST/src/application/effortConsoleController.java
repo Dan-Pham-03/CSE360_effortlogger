@@ -84,11 +84,13 @@ public class effortConsoleController extends sceneController implements Initiali
 		// Checks if the activity is already running. If it is, display an error message
 		if(count == 1) { 
 			warningActivityStart.setText("Please finish your current activity before starting a new one."); 
+			warningActivityStop.setText("");
 			return; 	
 		}
 		// Checks to see if all the dropdown lists have an item selected. If not, display error messaeg
 		else if(comboBoxProject.getSelectionModel().getSelectedItem() == null || comboBoxLifeCycle.getSelectionModel().getSelectedItem() == null || comboBoxCategory.getSelectionModel().getSelectedItem() == null || comboBoxPlan.getSelectionModel().getSelectedItem() == null) {
 			warningActivityStart.setText("Please have a selected item in each of the drop down lists."); 
+			warningActivityStop.setText("");
 			return;
 		}
 		// If an activity isn't already running, and every dropdown has an item selected, start the new activity
