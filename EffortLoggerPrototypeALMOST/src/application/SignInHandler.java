@@ -43,13 +43,14 @@ public class SignInHandler extends sceneController {
 	// Method that checks the credentials entered by the user in the login screen
 	private void checkCredentials(ActionEvent event) throws IOException { // A method that will see if the credentials are valid
 		Main m = new Main();
-
+		
+		//REPLACED WITH ACCOUNTS[] IN USERACCOUNTS.JAVA
 		String[][] credentials = { // A variation of possible username and password combinations that would be accepted in the login screen
 				{"bongo", "orange1o!"}, 
 				{"app", "1a23ad45!"}, 
 				{"sugarpie", "87*65"},
 				{"a", "a"}
-		};
+		}; 
 		
 		boolean validCredentials = false; // A boolean variable set to false
 		

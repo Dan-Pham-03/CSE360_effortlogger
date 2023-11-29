@@ -20,12 +20,16 @@ public class Logs extends logsSetup{
 	private String effortCategory;
 	private String lifeCycleStep;
 	
-	public String produceLogEntry() { //getter
+	public String produceEntry() { //getter
 		String entry = "";
 		entry = creator + "|" + team + "|"+ project+"|Date Created:"+ dateCreated+"|"+timeStart+"-"+
 				timeEnd+"|"+lifeCycleStep+"|"+effortCategory;
 		return entry;
 	}
-	
-	
+	public void createEffortLog(String creator, String etc) {
+		//create EffortLog
+	}
+	public void createDefectLog(String creator, String etc) {
+		//create EffortLog
+	}
 }

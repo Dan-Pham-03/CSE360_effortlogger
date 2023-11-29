@@ -23,11 +23,13 @@ public class FileAuthenticationFX extends Application {
     private static final Map<String, ZonedDateTime> userEditingEndTimes = new HashMap<>();
     private String username;
     private TextArea logTextArea;
-
+    
+    //NEED to be modified to run not in main
+    /*
     public static void main(String[] args) {
         launch(args);
     }
-
+*/
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("File Authentication");

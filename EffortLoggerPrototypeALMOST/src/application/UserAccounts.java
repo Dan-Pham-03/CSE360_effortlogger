@@ -9,26 +9,42 @@ public class UserAccounts {
 	private String password;
 	private String role;
 	private enum roleLevel { //using int values to represent 
-		VIEWER, DEVELOPER, ADMINISTRATOR
+		VIEWER, DEVELOPER, SUPERVISOR, ADMINISTRATOR
 	}
+	//Creating Database
+	public UserAccounts activeAccount = new UserAccounts(); //USED IN SIGNINHANDLER
 	
-	protected ArrayList <UserAccounts> accounts = new ArrayList<UserAccounts>();
+	protected ArrayList <UserAccounts> accountDatabase = new ArrayList<UserAccounts>();
+	public UserAccounts account1 = new UserAccounts("dhpham2@asu.edu", "dhpham2","password", "DEVELOPER");
+	public UserAccounts account2 = new UserAccounts("orange", "dhpham2","password", "DEVELOPER");
+	
 	
 	//addtion by DP
-	public void createAccount(String email, String username, String password, String role) {
+	public UserAccounts () {//base/void account
+		email = "void@gmail.com";
+		username = "ActiveAccount";
+		password = "password";
+		role = "ADMINISTRATOR";
+	}
+	public UserAccounts (String email, String username, String password, String role) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.role = role.toUpperCase(null); //in all caps please 
 	}
-	
-	public void addtoList(UserAccounts account) {
-		accounts.add(account);
+		
+	public boolean checkUserAccount(UserAccounts thing) {
+		boolean exists = false;
+		//for() {
+		
+		//}
+		
+		return exists;
 	}
 	
 	//Roles can be: Developer, Supervisor, Administrator
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email;	
 	}
 	public void setName(String name) {
 		this.username = name;
