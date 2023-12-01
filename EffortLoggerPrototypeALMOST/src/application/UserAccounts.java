@@ -12,6 +12,7 @@ public class UserAccounts {
 	private enum roleLevel { //using int values to represent 
 		VIEWER, DEVELOPER, SUPERVISOR, ADMINISTRATOR
 	}
+	public static UserAccounts activeacc;
 	//addtion by DP
 	public UserAccounts() {//base/void account
 		email = "void@gmail.com";
@@ -42,9 +43,11 @@ public class UserAccounts {
 	}
 	public boolean checkCredential(String user, String pass, ArrayList<UserAccounts> accountDatabase) {
 		boolean exists = false;
+		String tempUsername;
+		String tempPass;
 		for(UserAccounts temp : accountDatabase) {
-			String tempUsername = temp.getname();
-			String tempPass = temp.getPass();
+			tempUsername = temp.getname();
+			tempPass = temp.getPass();
 			if (tempUsername.equals(user) && tempPass.equals(pass)) {
 				exists = true;
 				break;
@@ -60,6 +63,9 @@ public class UserAccounts {
 			}
 		}
 		return acc;
+	}
+	public static UserAccounts getActiveAccount() {
+		return activeacc;
 	}
 	
 	//Roles can be: Developer, Supervisor, Administrator

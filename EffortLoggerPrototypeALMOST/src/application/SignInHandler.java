@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.util.ArrayList;
 
 public class SignInHandler extends sceneController {
 	
@@ -47,13 +48,13 @@ public class SignInHandler extends sceneController {
 		//Main m = new Main();
 		
 		//REPLACED WITH ACCOUNTS[] IN USERACCOUNTS.JAVA
-		/*
+		
 		String[][] credentials = { // A variation of possible username and password combinations that would be accepted in the login screen
 				{"bongo", "orange1o!"}, 
 				{"app", "1a23ad45!"}, 
 				{"sugarpie", "87*65"},
 				{"a", "a"}
-		};*/ 
+		};
 		UserAccounts userAccount1 = new UserAccounts("dhpham2@asu.edu", "dhpham2","password", "ADMINISTRATOR");
 		UserAccounts userAccount2 = new UserAccounts("orange@asu.edu", "bongo","orange1o!", "DEVELOPER");
 		UserAccounts userAccount3 = new UserAccounts("app@asu.edu", "sugarpie", "1a23ad45!", "SUPERVISOR");
@@ -67,20 +68,25 @@ public class SignInHandler extends sceneController {
 		accountDatabase.add(userAccount5);
 		UserAccounts activeAccount = new UserAccounts();
 		boolean validCredentials = false; // A boolean variable set to false
-		
 		// Checks to see if the entered credentials are valid
-		if (activeAccount.checkCredential(username.getText().toString(), password.getText().toString(), accountDatabase)) {
+		
+		String UN = username.getText().toString();
+		String PW = password.getText().toString();
+		if (activeAccount.checkCredential(UN, PW, accountDatabase)) {
 			validCredentials = true;
 			activeAccount = activeAccount.searchCredential(username.getText().toString(), accountDatabase);
+			UserAccounts.activeacc = activeAccount;  //should now be accessable to other classes
+			System.out.print("Active Account is: " + UserAccounts.activeacc.getname() );
 			//Sets ACTIVEACCOUNT
 		}
-		/*    ~~~~ Old Code~~~~~
+		 /* //~~~~ Old Code~~~~~
 		for(String [] credential : credentials) { // Goes through the credentials string array and checks if the login information matches
 			if(username.getText().toString().equals(credential[0]) && password.getText().toString().equals(credential[1])) {
 				validCredentials = true; // If it does match, set validCredentials to true and break out of the if statement
 				break;
 			}
-		}*/  
+		} */
+		textdataHandler handler = new textdataHandler("arbitrary");
 		// If they are valid, load the next scene
 		if(validCredentials) { // Checks the boolean validCredentials
 			//wrongSignIn.setText("Welcome to Effortlogger."); // If it is true, it will welcome the user into the Effortlogger application
@@ -99,6 +105,9 @@ public class SignInHandler extends sceneController {
 		}
 		else if(username.getText().isEmpty() && password.getText().isEmpty()) { // If the user didn't input anything, then ask them to enter their information
 			wrongSignIn.setText("Please enter your information.");
+		} //Addition for wrong/illegal text
+		else if(handler.textRestrictor(UN, 16) && handler.textRestrictor(PW, 32)) {
+			wrongSignIn.setText("Those characters are not allowed. Please try again");
 		}
 		else {
 			wrongSignIn.setText("Incorrect password or username."); // If the information is incorrect, then prompt them to try again

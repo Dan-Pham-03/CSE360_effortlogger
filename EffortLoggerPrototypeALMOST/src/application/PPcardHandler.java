@@ -66,7 +66,7 @@ public class PPcardHandler extends sceneController implements Initializable{
       	name = new JLabel(text);
         topleftp.add(new JLabel(text), labelConstraints);
 		
-        //Insert Getter for Project/Phase that I forgot 
+        //Insert Getter for Project/Phase if exists
         
         //Insert getter for the tags
 		String tags = "Development, privacy, etc";
@@ -80,7 +80,6 @@ public class PPcardHandler extends sceneController implements Initializable{
 		points = new JLabel(usp);
 		topleftp.add(points);
 		
-		
 		JPanel bottomPanel = new JPanel(new BorderLayout());
 		ppCframe.add(bottomPanel, BorderLayout.SOUTH);
 		bottomPanel.setBorder(BorderFactory.createTitledBorder("User Story Details"));
@@ -91,13 +90,20 @@ public class PPcardHandler extends sceneController implements Initializable{
 		bottomPanel.add(new JScrollPane(detailArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 	                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS), BorderLayout.CENTER);
 		
+		//grabs ActiveAccount, accesses role
+		UserAccounts activeAccount = UserAccounts.getActiveAccount();
+		String role = activeAccount.getRole();
+		boolean hasAccess = false;
+		if (role.equals("DEVELOPER") || role.equals("SUPERVISOR") || role.equals("ADMINISTRATOR") ) {
+			hasAccess = true;
+		}
 		//seeing if this content is correctly censcored 
-		String data = "Private Information: blah blah blah" + "\r\n"
-				+ "Information about funding: blah blah blah"+ "\r\n"
+		String data = "Private Information: blah blah blah" 
+				+ "Information about funding: blah blah blah" 
 				+ "Information about what needs to be planned: blah blah";
 		textdataHandler newtext = new textdataHandler(data);
 		//insert if
-		if (true) { //insert getter for Active Account
+		if (!hasAccess) { //if doesn't have access, censor data
 			data = newtext.censorDataField(newtext.getData());
 		}	
 		detailArea = new JTextArea(data, 6, 30);

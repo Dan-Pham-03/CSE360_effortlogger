@@ -7,6 +7,10 @@ public class textdataHandler {
 	//Function to be utilized to make information censored
 		//if Roles don't align with access
 	String information;
+	
+		public textdataHandler() {
+			information = "";
+		}
 		public textdataHandler(String data) {
 			information = data;
 		}
