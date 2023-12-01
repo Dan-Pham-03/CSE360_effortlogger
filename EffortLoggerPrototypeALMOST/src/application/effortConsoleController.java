@@ -24,9 +24,11 @@ public class effortConsoleController extends sceneController implements Initiali
 	private LocalDateTime startTime;
 	private String username;
 	String user;
+	private ObservableList<LogEntry> logEntries = FXCollections.observableArrayList();
+    	private LogConsole logConsole = new LogConsole(logEntries);
 
-	int count;
-	int index;
+	private int count;
+	private int index;
 
 	// Variables used in the effortConsole
 	@FXML
@@ -51,7 +53,7 @@ public class effortConsoleController extends sceneController implements Initiali
 	private Rectangle rectangleColor;
 	
 	@FXML
-    private Label usernameLabel;
+    	private Label usernameLabel;
 	
 	@FXML
 	private Label warningActivityStart;
@@ -71,6 +73,7 @@ public class effortConsoleController extends sceneController implements Initiali
     // Initializes the options for the dropdown in the application
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
+		logConsole = new LogConsole(LogData.getLogEntries());
 		comboBoxProject.setItems(FXCollections.observableArrayList("Business Project", "Development Project"));
 		comboBoxLifeCycle.setItems(FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding", "Verifying", "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting"));
 		comboBoxCategory.setItems(FXCollections.observableArrayList("Plans", "Deliverables", "Interruptions", "Defects", "Others"));
@@ -93,7 +96,7 @@ public class effortConsoleController extends sceneController implements Initiali
 			warningActivityStop.setText("");
 			return;
 		}
-		// If an activity isn't already running, and every dropdown has an item selected, start the new activity
+			// If an activity isn't already running, and every dropdown has an item selected, start the new activity
 			count = 1;
 			index++;
 			
@@ -130,6 +133,18 @@ public class effortConsoleController extends sceneController implements Initiali
 			// Formats the stopped time
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' HH:mm:ss a");
 			String formattedStopTime = stopTime.format(formatter);
+
+			// Create and add a new LogEntry
+            		LogEntry logEntry = new LogEntry(
+                		index, 
+                		startTime, 
+                		stopTime, 
+               			String.format("%02d:%02d:%02d", hours, minutes, seconds), 
+               
+                		comboBoxLifeCycle.getValue(), 
+                		comboBoxProject.getValue()
+            		);
+            		LogData.addLogEntry(logEntry);
 			
 			// Updates the scene and UI to reflect that an activity has started
 			clockText.setText("Clock has Stopped");
@@ -147,4 +162,8 @@ public class effortConsoleController extends sceneController implements Initiali
 			warningActivityStop.setText("Have not started an activity yet."); 
 		}
 	}
+	
+	public void showLogs(ActionEvent event) {
+        	logConsole.showLogWindow();
+    	}
 }
