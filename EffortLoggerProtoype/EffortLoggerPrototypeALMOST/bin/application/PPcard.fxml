@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PPcardHandler">
+   <children>
+      <Button layoutX="537.0" layoutY="6.0" mnemonicParsing="false" onAction="#switchToLogin" text="LogOut" />
+      <Button layoutX="19.0" layoutY="371.0" mnemonicParsing="false" onAction="#switchToEffortConsole" text="EffortConsole" />
+      <Button layoutX="107.0" layoutY="371.0" mnemonicParsing="false" onAction="#switchToELogEditor" text="EffortLogEditor" />
+      <Button layoutX="203.0" layoutY="371.0" mnemonicParsing="false" onAction="#switchToDefectConsole" text="DefectConsole" />
+      <Button layoutX="296.0" layoutY="371.0" mnemonicParsing="false" onAction="#switchToLogs" text="Logs" />
+      <Button layoutX="337.0" layoutY="371.0" mnemonicParsing="false" onAction="#switchToDefinitions" text="Definitions" />
+      <Button layoutX="410.0" layoutY="371.0" mnemonicParsing="false" onAction="#switchToLogManager" text="LogManager" />
+      <Label layoutX="214.0" layoutY="2.0" text="Planning Poker">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <Line endX="600.0" endY="35" startY="35.0" />
+      <ButtonBar layoutX="55.0" layoutY="169.0" prefHeight="40.0" prefWidth="200.0" />
+      <Button layoutX="493.0" layoutY="371.0" mnemonicParsing="false" text="Planning Poker" />
+      <Button layoutX="182.0" layoutY="59.0" mnemonicParsing="false" onAction="#createPPcard" text="Generate Card" />
+      <ComboBox fx:id="comboBoxUS" layoutX="32.0" layoutY="59.0" prefWidth="150.0" promptText="Select a User Story" />
+   </children>
+</AnchorPane>
