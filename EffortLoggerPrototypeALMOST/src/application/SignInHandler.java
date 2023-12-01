@@ -2,6 +2,8 @@ package application;
 
 // Different things that needed to be imported
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,26 +44,43 @@ public class SignInHandler extends sceneController {
 	
 	// Method that checks the credentials entered by the user in the login screen
 	private void checkCredentials(ActionEvent event) throws IOException { // A method that will see if the credentials are valid
-		Main m = new Main();
+		//Main m = new Main();
 		
 		//REPLACED WITH ACCOUNTS[] IN USERACCOUNTS.JAVA
+		/*
 		String[][] credentials = { // A variation of possible username and password combinations that would be accepted in the login screen
 				{"bongo", "orange1o!"}, 
 				{"app", "1a23ad45!"}, 
 				{"sugarpie", "87*65"},
 				{"a", "a"}
-		}; 
-		
+		};*/ 
+		UserAccounts userAccount1 = new UserAccounts("dhpham2@asu.edu", "dhpham2","password", "ADMINISTRATOR");
+		UserAccounts userAccount2 = new UserAccounts("orange@asu.edu", "bongo","orange1o!", "DEVELOPER");
+		UserAccounts userAccount3 = new UserAccounts("app@asu.edu", "sugarpie", "1a23ad45!", "SUPERVISOR");
+		UserAccounts userAccount4 = new UserAccounts("a@asu.edu", "a", "a", "VIEWER");
+		UserAccounts userAccount5 = new UserAccounts("sugar@asu.edu", "sugarpie", "87*65", "DEVELOPER");
+		ArrayList <UserAccounts> accountDatabase = new ArrayList<UserAccounts>();
+		accountDatabase.add(userAccount1);
+		accountDatabase.add(userAccount2);
+		accountDatabase.add(userAccount3);    // Initializing Faux account database.
+		accountDatabase.add(userAccount4);
+		accountDatabase.add(userAccount5);
+		UserAccounts activeAccount = new UserAccounts();
 		boolean validCredentials = false; // A boolean variable set to false
 		
 		// Checks to see if the entered credentials are valid
+		if (activeAccount.checkCredential(username.getText().toString(), password.getText().toString(), accountDatabase)) {
+			validCredentials = true;
+			activeAccount = activeAccount.searchCredential(username.getText().toString(), accountDatabase);
+			//Sets ACTIVEACCOUNT
+		}
+		/*    ~~~~ Old Code~~~~~
 		for(String [] credential : credentials) { // Goes through the credentials string array and checks if the login information matches
 			if(username.getText().toString().equals(credential[0]) && password.getText().toString().equals(credential[1])) {
 				validCredentials = true; // If it does match, set validCredentials to true and break out of the if statement
 				break;
 			}
-		}
-		
+		}*/  
 		// If they are valid, load the next scene
 		if(validCredentials) { // Checks the boolean validCredentials
 			//wrongSignIn.setText("Welcome to Effortlogger."); // If it is true, it will welcome the user into the Effortlogger application

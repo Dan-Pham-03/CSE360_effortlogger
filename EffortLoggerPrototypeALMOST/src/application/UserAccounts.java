@@ -1,5 +1,6 @@
 package application;
 import java.util.ArrayList;
+import java.io.*;
 
 public class UserAccounts {
 	//username, name, last_name, etc
@@ -11,16 +12,8 @@ public class UserAccounts {
 	private enum roleLevel { //using int values to represent 
 		VIEWER, DEVELOPER, SUPERVISOR, ADMINISTRATOR
 	}
-	//Creating Database
-	public UserAccounts activeAccount = new UserAccounts(); //USED IN SIGNINHANDLER
-	
-	protected ArrayList <UserAccounts> accountDatabase = new ArrayList<UserAccounts>();
-	public UserAccounts account1 = new UserAccounts("dhpham2@asu.edu", "dhpham2","password", "DEVELOPER");
-	public UserAccounts account2 = new UserAccounts("orange", "dhpham2","password", "DEVELOPER");
-	
-	
 	//addtion by DP
-	public UserAccounts () {//base/void account
+	public UserAccounts() {//base/void account
 		email = "void@gmail.com";
 		username = "ActiveAccount";
 		password = "password";
@@ -32,14 +25,41 @@ public class UserAccounts {
 		this.password = password;
 		this.role = role.toUpperCase(null); //in all caps please 
 	}
-		
-	public boolean checkUserAccount(UserAccounts thing) {
+	//takes in account and database and checks for matches.
+	public boolean checkUserAccount(UserAccounts thing, UserAccounts[] database) {
 		boolean exists = false;
-		//for() {
-		
-		//}
-		
+		String itemUsername = thing.getname();
+		String itemPass = thing.getPass();
+		for(UserAccounts temp : database) {
+			String tempUsername = temp.getname();
+			String tempPass = temp.getPass();
+			if (tempUsername.equals(itemUsername) && tempPass.equals(itemPass)) {
+				exists = true;
+				break;
+			}
+		}
 		return exists;
+	}
+	public boolean checkCredential(String user, String pass, ArrayList<UserAccounts> accountDatabase) {
+		boolean exists = false;
+		for(UserAccounts temp : accountDatabase) {
+			String tempUsername = temp.getname();
+			String tempPass = temp.getPass();
+			if (tempUsername.equals(user) && tempPass.equals(pass)) {
+				exists = true;
+				break;
+			}
+		}
+		return exists;
+	}
+	public UserAccounts searchCredential(String user, ArrayList<UserAccounts> database) {
+		UserAccounts acc = new UserAccounts();
+		for (UserAccounts temp: database) {
+			if (temp.getname().equals(user)) {
+				acc = temp;
+			}
+		}
+		return acc;
 	}
 	
 	//Roles can be: Developer, Supervisor, Administrator

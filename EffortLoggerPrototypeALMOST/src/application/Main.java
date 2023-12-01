@@ -48,6 +48,6 @@ public class Main extends Application {
 	}
     // The main method that launches the JavaFX application
     public static void main(String[] args) {
-        launch(args);
+    	launch(args);
     }
 }
