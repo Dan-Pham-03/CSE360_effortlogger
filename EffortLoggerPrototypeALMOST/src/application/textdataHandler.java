@@ -37,16 +37,23 @@ public class textdataHandler {
 			
 			return newdf;
 		}*/
-		public boolean containsIllegal (String toExamine){
+		public boolean containsIllegal (String toExamine) {
 			Pattern pattern = Pattern.compile("[~#@*+%{}<>\\[\\]|\"\\_^]");
 		    Matcher matcher = pattern.matcher(toExamine);
 		    return matcher.find();
 		}
+		// Guidelines for input (Can be noted out if necessary)
 		public boolean textRestrictor(String text, int limit) {
 			boolean notAllowed = false;
-			if (text.length() >= limit || containsIllegal(text)){
+			if (text.length() >= limit) {
 				notAllowed = true;
-			}
+			} // Cannot exceed limit of characters
+			if (containsIllegal(text)) {
+				notAllowed = true;
+			} // Cannot contain illegal characters
+			/* if (text.length() <= 3) {
+				notAllowed = true;
+			} */ // Cannot be less than 3 characters long (Can be changed depending on length requirements)
 			return notAllowed;
-		}
+		} // Restricts inputs that do not follow the guidelines
 }
