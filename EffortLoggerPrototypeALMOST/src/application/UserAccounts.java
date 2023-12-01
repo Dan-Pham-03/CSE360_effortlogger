@@ -9,11 +9,12 @@ public class UserAccounts {
 	private String username;
 	private String password;
 	private String role;
-	private enum roleLevel { //using int values to represent 
+	/*private enum roleLevel { //using int values to represent 
 		VIEWER, DEVELOPER, SUPERVISOR, ADMINISTRATOR
-	}
-	public static UserAccounts activeacc;
-	//addtion by DP
+	}*/
+	public static UserAccounts activeacc;  //Static, used by all objects
+	
+	//addition by DP
 	public UserAccounts() {//base/void account
 		email = "void@gmail.com";
 		username = "ActiveAccount";
@@ -24,7 +25,7 @@ public class UserAccounts {
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.role = role.toUpperCase(null); //in all caps please 
+		this.role = role; //in all caps please 
 	}
 	//takes in account and database and checks for matches.
 	public boolean checkUserAccount(UserAccounts thing, UserAccounts[] database) {
@@ -64,11 +65,10 @@ public class UserAccounts {
 		}
 		return acc;
 	}
-	public static UserAccounts getActiveAccount() {
+	public static UserAccounts getActiveAccount() { //maybe not needed
 		return activeacc;
 	}
-	
-	//Roles can be: Developer, Supervisor, Administrator
+	//Roles can be: Viewer, Developer, Supervisor, Administrator
 	public void setEmail(String email) {
 		this.email = email;	
 	}

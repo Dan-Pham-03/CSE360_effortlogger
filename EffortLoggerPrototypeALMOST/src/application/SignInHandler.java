@@ -41,10 +41,11 @@ public class SignInHandler extends sceneController {
 	
 	public void userSignIn(ActionEvent event) throws IOException{ // A method that leads to the checkCredentials method
 		checkCredentials(event);
+					
 	}
 	
 	// Method that checks the credentials entered by the user in the login screen
-	private void checkCredentials(ActionEvent event) throws IOException { // A method that will see if the credentials are valid
+	protected void checkCredentials(ActionEvent event) throws IOException { // A method that will see if the credentials are valid
 		//Main m = new Main();
 		
 		//REPLACED WITH ACCOUNTS[] IN USERACCOUNTS.JAVA
@@ -54,7 +55,7 @@ public class SignInHandler extends sceneController {
 				{"app", "1a23ad45!"}, 
 				{"sugarpie", "87*65"},
 				{"a", "a"}
-		};
+		};  
 		UserAccounts userAccount1 = new UserAccounts("dhpham2@asu.edu", "dhpham2","password", "ADMINISTRATOR");
 		UserAccounts userAccount2 = new UserAccounts("orange@asu.edu", "bongo","orange1o!", "DEVELOPER");
 		UserAccounts userAccount3 = new UserAccounts("app@asu.edu", "sugarpie", "1a23ad45!", "SUPERVISOR");
@@ -67,6 +68,7 @@ public class SignInHandler extends sceneController {
 		accountDatabase.add(userAccount4);
 		accountDatabase.add(userAccount5);
 		UserAccounts activeAccount = new UserAccounts();
+		
 		boolean validCredentials = false; // A boolean variable set to false
 		// Checks to see if the entered credentials are valid
 		
@@ -76,10 +78,10 @@ public class SignInHandler extends sceneController {
 			validCredentials = true;
 			activeAccount = activeAccount.searchCredential(username.getText().toString(), accountDatabase);
 			UserAccounts.activeacc = activeAccount;  //should now be accessable to other classes
-			System.out.print("Active Account is: " + UserAccounts.activeacc.getname() );
+			System.out.println("Active Account is: " + UserAccounts.activeacc.getname()+ ", has the role: "+ UserAccounts.activeacc.getRole());
 			//Sets ACTIVEACCOUNT
-		}
-		 /* //~~~~ Old Code~~~~~
+		}/*
+		 //~~~~ Old Code~~~~~ 
 		for(String [] credential : credentials) { // Goes through the credentials string array and checks if the login information matches
 			if(username.getText().toString().equals(credential[0]) && password.getText().toString().equals(credential[1])) {
 				validCredentials = true; // If it does match, set validCredentials to true and break out of the if statement
@@ -106,7 +108,7 @@ public class SignInHandler extends sceneController {
 		else if(username.getText().isEmpty() && password.getText().isEmpty()) { // If the user didn't input anything, then ask them to enter their information
 			wrongSignIn.setText("Please enter your information.");
 		} //Addition for wrong/illegal text
-		else if(handler.textRestrictor(UN, 16) && handler.textRestrictor(PW, 32)) {
+		else if(handler.textRestrictor(username.getText().toString(), 16) || handler.textRestrictor(password.getText().toString(), 32)) {
 			wrongSignIn.setText("Those characters are not allowed. Please try again");
 		}
 		else {

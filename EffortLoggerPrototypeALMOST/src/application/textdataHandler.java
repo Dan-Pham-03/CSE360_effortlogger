@@ -44,7 +44,7 @@ public class textdataHandler {
 		}
 		public boolean textRestrictor(String text, int limit) {
 			boolean notAllowed = false;
-			if (text.length() >= limit && containsIllegal(text)){
+			if (text.length() >= limit || containsIllegal(text)){
 				notAllowed = true;
 			}
 			return notAllowed;

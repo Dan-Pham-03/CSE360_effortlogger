@@ -90,7 +90,7 @@ public class PPcardHandler extends sceneController implements Initializable{
 		bottomPanel.add(new JScrollPane(detailArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 	                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS), BorderLayout.CENTER);
 		
-		//grabs ActiveAccount, accesses role
+		//grabs ActiveAcc, accesses role
 		UserAccounts activeAccount = UserAccounts.getActiveAccount();
 		String role = activeAccount.getRole();
 		boolean hasAccess = false;
@@ -107,6 +107,8 @@ public class PPcardHandler extends sceneController implements Initializable{
 			data = newtext.censorDataField(newtext.getData());
 		}	
 		detailArea = new JTextArea(data, 6, 30);
+		detailArea.setLineWrap(true);
+		detailArea.setWrapStyleWord(true);
 		bottomPanel.add(new JScrollPane(detailArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS), BorderLayout.CENTER);
 		
