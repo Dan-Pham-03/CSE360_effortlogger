@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import javafx.scene.shape.Rectangle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,7 @@ public class effortConsoleController extends sceneController implements Initiali
 	private String username;
 	String user;
 	private ObservableList<LogEntry> logEntries = FXCollections.observableArrayList();
-    	private LogConsole logConsole = new LogConsole(logEntries);
+    private LogConsole logConsole = new LogConsole(logEntries);
 
 	private int count;
 	private int index;
