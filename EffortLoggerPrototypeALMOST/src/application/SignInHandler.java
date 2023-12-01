@@ -25,6 +25,7 @@ public class SignInHandler extends sceneController {
 	}
 	
 	int authCode = 0;
+	int attempts = 3; // Available attempts, can be changed
 	
 	// Private variables for the varying buttons, labels, and fields
 	@FXML
@@ -90,29 +91,41 @@ public class SignInHandler extends sceneController {
 		} */
 		textdataHandler handler = new textdataHandler("arbitrary");
 		// If they are valid, load the next scene
-		if(validCredentials) { // Checks the boolean validCredentials
-			//wrongSignIn.setText("Welcome to Effortlogger."); // If it is true, it will welcome the user into the Effortlogger application
-			//m.changeStage("EffortConsole.fxml"); // Takes them to the second scene (Effortlogger)
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortConsole.fxml"));
-			root = loader.load();
+		if (attempts > 0) { // If attempts are available, check the user inputs for valid login information
+			if(validCredentials) { // Checks the boolean validCredentials
+				//wrongSignIn.setText("Welcome to Effortlogger."); // If it is true, it will welcome the user into the Effortlogger application
+				//m.changeStage("EffortConsole.fxml"); // Takes them to the second scene (Effortlogger)
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortConsole.fxml"));
+				root = loader.load();
 	
-			//effortConsoleController controller = loader.getController();
-			//controller.setUsername(username.getText());
+				//effortConsoleController controller = loader.getController();
+				//controller.setUsername(username.getText());
 						
-			// Create the authentication code for the user
-			authCode = (int)(Math.random() * 90000) + 10000;
-			System.out.println("Your 5 digit code is: " + authCode);
+				// Create the authentication code for the user
+				authCode = (int)(Math.random() * 90000) + 10000;
+				System.out.println("Your 5 digit code is: " + authCode);
 			
-			switchToTwoFactorAuthen(event, authCode); // Switch scenes
+				switchToTwoFactorAuthen(event, authCode); // Switch scenes
+			}
+			else if(username.getText().isEmpty() && password.getText().isEmpty()) { // If the user didn't input anything, then ask them to enter their information
+				wrongSignIn.setText("Please enter your information.");
+			} // Addition for wrong/illegal text
+			else if(username.getText().isEmpty() && !(password.getText().isEmpty())) { // If the user didn't input a username, then ask them to enter one
+				wrongSignIn.setText("Please enter a username.");
+			} //Addition of message in case of only 1 missing field
+			else if(!(username.getText().isEmpty()) && password.getText().isEmpty()) { // If the user didn't input password, then ask them to enter one
+				wrongSignIn.setText("Please enter a password.");
+			} //Addition of message in case of only 1 missing field
+			else if(handler.textRestrictor(username.getText().toString(), 16) || handler.textRestrictor(password.getText().toString(), 32)) {
+				wrongSignIn.setText("Those characters are not allowed. Please try again");
+			}
+			else {
+				attempts -= 1;
+				wrongSignIn.setText("Incorrect password or username. You have " + attempts + " attempts left."); // If the information is incorrect, then prompt them to try again
+			}
 		}
-		else if(username.getText().isEmpty() && password.getText().isEmpty()) { // If the user didn't input anything, then ask them to enter their information
-			wrongSignIn.setText("Please enter your information.");
-		} //Addition for wrong/illegal text
-		else if(handler.textRestrictor(username.getText().toString(), 16) || handler.textRestrictor(password.getText().toString(), 32)) {
-			wrongSignIn.setText("Those characters are not allowed. Please try again");
-		}
-		else {
-			wrongSignIn.setText("Incorrect password or username."); // If the information is incorrect, then prompt them to try again
+		else { // Locked out of login
+			wrongSignIn.setText("No more attempts available. Please close the app."); // No more attempts available, close app to reset attempts
 		}
 	}
 }
